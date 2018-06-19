@@ -23,16 +23,18 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     var call: Call<WeatherInfo>? = null
+    var nameOfCity:String?= null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        init()
 
 
 
-        NetWork.getW().getData(idOfBishkek, APIID, mode, units).enqueue(object : Callback<WeatherInfo> {
+        NetWork.getW().getData(nameOfCity!!, APIID, mode, units).enqueue(object : Callback<WeatherInfo> {
             override fun onResponse(call: Call<WeatherInfo>?, response: Response<WeatherInfo>?) {
                 val weatherInfo = response!!.body()
 
@@ -45,6 +47,9 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+    fun init(){
+        nameOfCity = intent.getStringExtra("nameOfMarker") + ",kg"
     }
 
 

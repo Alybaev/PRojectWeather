@@ -49,7 +49,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onMarkerClick(marker: Marker?): Boolean {
         val intent = Intent(this@MapsActivity, MainActivity::class.java)
-        intent.putExtra("idOfCinema", marker!!.title)
+
+        intent.putExtra("nameOfMarker", marker!!.title)
         startActivity(intent)
         return true
     }
