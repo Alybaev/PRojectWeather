@@ -13,13 +13,10 @@ import com.example.admin.weather.utils.Constants.Companion.idOfBishkek
 import com.example.admin.weather.utils.Constants.Companion.mode
 import com.example.admin.weather.utils.Constants.Companion.units
 import com.example.admin.weather.utils.NetWork
-import kotlinx.android.synthetic.main.activity_main.*
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.IOException
-import com.google.gson.reflect.TypeToken
-import com.google.gson.Gson
 
 
 
@@ -32,8 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       val result = getDataFromJsonCities()
-        info.text = result[0].name
+
 
 
         NetWork.getW().getData(idOfBishkek, APIID, mode, units).enqueue(object : Callback<WeatherInfo> {
@@ -50,26 +46,6 @@ class MainActivity : AppCompatActivity() {
 
         })
     }
-    // For Json Asset
-    fun loadJSONFromAsset(): String? {
-        var json: String? = null
-        try {
-            val `is` =assets.open("city.list.kg.json")
-            val size = `is`.available()
-            val buffer = ByteArray(size)
-            `is`.read(buffer)
-            `is`.close()
-            json = String(buffer)
-        } catch (ex: IOException) {
-            ex.printStackTrace()
-            return null
-        }
 
-        return json
-    }
-    private fun getDataFromJsonCities(): ArrayList<City> {
-        val json = loadJSONFromAsset()
-        return Gson().fromJson<ArrayList<City>>(json, object : TypeToken<ArrayList<City>>() {}.type)
-    }
 
 }

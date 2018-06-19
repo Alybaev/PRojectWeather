@@ -1,18 +1,25 @@
 package com.example.admin.weather
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.FragmentActivity
+import com.example.admin.weather.model.city.City
+import com.example.admin.weather.utils.JsonAssetReader
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var mMap: GoogleMap
+    private var kyrgyzPlaces: LatLng? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,21 +30,29 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        setUpMap()
     }
+
+    private fun setUpMap() {
+        mMap.setOnMarkerClickListener(this)
+
+        var city = JsonAssetReader.getDataFromJsonCities(this)
+        for (i in 0 until city.size) {
+            kyrgyzPlaces = LatLng(city[i].coord?.lat!!, city[i].coord?.lon!!)
+            mMap.addMarker(MarkerOptions().position(kyrgyzPlaces!!).title(city[i].name))
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(kyrgyzPlaces))
+        }
+
+    }
+
+    override fun onMarkerClick(marker: Marker?): Boolean {
+        val intent = Intent(this@MapsActivity, MainActivity::class.java)
+        intent.putExtra("idOfCinema", marker!!.title)
+        startActivity(intent)
+        return true
+    }
+
+
 }
