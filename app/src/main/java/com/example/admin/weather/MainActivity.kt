@@ -23,27 +23,26 @@ import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
-    var call: Call<WeatherInfo>? = null
     var nameOfCity:String?= null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         init()
+        getBackData()
 
-
-
+    }
+    fun getBackData(){
         NetWork.getW().getData(nameOfCity!!, APIID, mode, units).enqueue(object : Callback<WeatherInfo> {
             override fun onResponse(call: Call<WeatherInfo>?, response: Response<WeatherInfo>?) {
                 var weatherInfo = response!!.body()
 
-                tempeture_view.text = weatherInfo!!.list[0].main.temp.toString()
+                tempeture_view.text = weatherInfo!!.list[0].main.temp.toString() + "&#8451"
                 time.text = changeTimeText(weatherInfo!!.list[0].dt_txt)
-                humidity_text.text = weatherInfo!!.list[0].main.humidity.toString()
-                wind_speed_text.text = weatherInfo!!.list[0].wind.speed.toString()
-                cloud_text.text = weatherInfo!!.list[0].clouds.all.toString()
+                humidity_text.text = weatherInfo!!.list[0].main.humidity.toString() + "%"
+                wind_speed_text.text = weatherInfo!!.list[0].wind.speed.toString() + "m/s"
+                cloud_text.text = weatherInfo!!.list[0].clouds.all.toString() + "%"
 
                 Log.d("respp", response!!.body().toString())
             }
@@ -60,6 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
     fun changeTimeText(timeText:String): String {
         var res = timeText.substring(5,11)
+        res = res.replace(':', '.')
         return res
     }
 
