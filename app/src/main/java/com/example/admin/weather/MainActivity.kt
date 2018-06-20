@@ -1,9 +1,19 @@
 package com.example.admin.weather
 
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.TabLayout
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentPagerAdapter
 import android.util.Log
+import android.widget.Toast
+import com.example.admin.weather.R.id.view_pager
+import com.example.admin.weather.adapters.CustomAdapter
+import com.example.admin.weather.fragments.FragmentForecast
+import com.example.admin.weather.fragments.FragmentMain
 
 
 import com.example.admin.weather.model.weather.WeatherInfo
@@ -23,45 +33,39 @@ import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
-    var nameOfCity:String?= null
 
+    var custom: CustomAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         init()
-        getBackData()
+        addListenerOnTabLayout()
 
-    }
-    fun getBackData(){
-        NetWork.getW().getData(nameOfCity!!, APIID, mode, units).enqueue(object : Callback<WeatherInfo> {
-            override fun onResponse(call: Call<WeatherInfo>?, response: Response<WeatherInfo>?) {
-                var weatherInfo = response!!.body()
-
-                tempeture_view.text = weatherInfo!!.list[0].main.temp.toString() + "&#8451"
-                time.text = changeTimeText(weatherInfo!!.list[0].dt_txt)
-                humidity_text.text = weatherInfo!!.list[0].main.humidity.toString() + "%"
-                wind_speed_text.text = weatherInfo!!.list[0].wind.speed.toString() + "m/s"
-                cloud_text.text = weatherInfo!!.list[0].clouds.all.toString() + "%"
-
-                Log.d("respp", response!!.body().toString())
-            }
-
-            override fun onFailure(call: Call<WeatherInfo>?, t: Throwable?) {
-                Log.d("respp", t.toString())
-            }
-
-        })
     }
     fun init(){
-        nameOfCity = intent.getStringExtra("nameOfMarker") + ",kg"
-        city_name.text = nameOfCity
+        custom = CustomAdapter(supportFragmentManager, applicationContext)
+        view_pager.adapter = custom
     }
-    fun changeTimeText(timeText:String): String {
-        var res = timeText.substring(5,11)
-        res = res.replace(':', '.')
-        return res
-    }
+    fun addListenerOnTabLayout(){
+        tabLayout?.setupWithViewPager(view_pager)
+        tabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                view_pager.currentItem = tab!!.position
+            }
 
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                view_pager.currentItem = tab!!.position
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                view_pager.currentItem = tab!!.position
+            }
+        })
+    }
 
 }
+
+
+

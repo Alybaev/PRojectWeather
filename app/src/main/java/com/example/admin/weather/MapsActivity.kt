@@ -3,6 +3,7 @@ package com.example.admin.weather
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import com.example.admin.weather.model.city.City
 import com.example.admin.weather.utils.JsonAssetReader
@@ -49,10 +50,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onMarkerClick(marker: Marker?): Boolean {
         val intent = Intent(this@MapsActivity, MainActivity::class.java)
-
-        intent.putExtra("nameOfMarker", marker!!.title)
+        addDataInBundle(marker)
         startActivity(intent)
         return true
+    }
+
+    private fun addDataInBundle(marker: Marker?) {
+        val bundle = Bundle()
+        bundle.putString("nameOfMarker",  marker!!.title)
+        val frag = Fragment()
+        frag.arguments = bundle
     }
 
 

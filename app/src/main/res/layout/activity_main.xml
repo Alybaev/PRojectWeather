@@ -2,129 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    tools:context=".MainActivity"
-    android:gravity="center">
-
-    <TextView
-        android:id="@+id/tempeture_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:textColor="@color/common_google_signin_btn_text_dark_pressed"
-        android:textSize="100sp"
-        tools:text="24C" />
-    <LinearLayout
-        android:id="@+id/time_city_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/measure_view">
-
-        <TextView
-            android:id="@+id/city_name"
-            android:textColor="@color/text_color"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Bishkek" />
-
-        <TextView
-            android:textColor="@color/text_color"
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="20.06" />
+    android:orientation="vertical"
+    >
 
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/measure_view"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="465dp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical">
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-            <ImageView
-                android:id="@+id/cloud"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:src="@drawable/cloud_white" />
+        android:background="@android:color/holo_green_light"
 
-            <TextView
-                android:id="@+id/cloud_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@string/common_google_play_services_update_text"
-                android:textColor="@color/text_color"
-                android:textSize="30dp"
-                tools:text="36 %" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical">
-
-
-            <ImageView
-                android:id="@+id/wind_white"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:src="@drawable/wind_white" />
-
-            <TextView
-                android:id="@+id/wind_speed_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_color"
-                android:textSize="30dp"
-                tools:text="36 m/s" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical">
-
-
-            <ImageView
-                android:id="@+id/humidity"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:src="@drawable/humidity_white" />
-
-            <TextView
-                android:id="@+id/humidity_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_color"
-                android:textSize="30dp"
-                tools:text="36 %" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-
-
+        app:tabGravity="fill"
+        app:tabMode="fixed" />
 </LinearLayout>
