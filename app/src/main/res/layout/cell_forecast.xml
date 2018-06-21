@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layout_main"
+    android:background="@color/background">
+    <LinearLayout
+        android:id="@+id/layout_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        >
+        <TextView
+            android:id="@+id/time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:textColor="@color/text_color"
+            tools:text="06.12"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp" />
+
+        <ImageView
+            android:id="@+id/forecast_image"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            tools:src="@drawable/sun" />
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:id="@+id/day_night_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="40dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/day_forecast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text_day_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/text_color"
+                android:textSize="20sp"
+                tools:text="24C" />
+
+            <ImageView
+                android:id="@+id/image_sun"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="3dp"
+                tools:src="@drawable/sun" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/night_forecast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text_night_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/text_color"
+                android:textSize="20sp"
+                tools:text="24C" />
+
+            <ImageView
+                android:id="@+id/image_moon"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                tools:src="@drawable/moon" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
