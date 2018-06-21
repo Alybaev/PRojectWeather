@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.admin.weather.R
 import com.example.admin.weather.model.weather.WeatherInfo
-import com.example.admin.weather.utils.Constants
+import com.example.admin.weather.utils.Constants.Companion.APIID
+import com.example.admin.weather.utils.Constants.Companion.MODE
+import com.example.admin.weather.utils.Constants.Companion.UNITS
+import com.example.admin.weather.utils.Constants.Companion.cityNameKeyBundle
 import com.example.admin.weather.utils.NetWork
 import kotlinx.android.synthetic.main.fragment_main.*
 import retrofit2.Call
@@ -17,25 +20,28 @@ import retrofit2.Response
 
 class FragmentMain : Fragment() {
     var nameOfCity:String?= null
-
     var weatherInfo:WeatherInfo?=null
-
+    var cityNameForRequest:String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val v = inflater.inflate(R.layout.fragment_main, container, false)
+        return v
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         init()
         getBackData()
-
-        return inflater.inflate(R.layout.fragment_main, null, false)
 
     }
 
 
     fun getBackData(){
-        NetWork.getW().getData(nameOfCity!!, Constants.APIID, Constants.mode, Constants.units).enqueue(object : Callback<WeatherInfo> {
+        NetWork.getW().getData(cityNameForRequest!!, APIID, MODE, UNITS).enqueue(object : Callback<WeatherInfo> {
             override fun onResponse(call: Call<WeatherInfo>?, response: Response<WeatherInfo>?) {
                 weatherInfo = response!!.body()
                 NetWork.weatherInfo = weatherInfo
-                tempeture_view.text = weatherInfo!!.list[0].main.temp.toString() + "&#8451"
+                tempeture_view.text = weatherInfo!!.list[0].main.temp.toString() + "\u2103"
                 time.text = changeTimeText(weatherInfo!!.list[0].dt_txt)
                 humidity_text.text = weatherInfo!!.list[0].main.humidity.toString() + "%"
                 wind_speed_text.text = weatherInfo!!.list[0].wind.speed.toString() + "m/s"
@@ -51,8 +57,9 @@ class FragmentMain : Fragment() {
         })
     }
     fun init(){
-        nameOfCity = arguments!!.getString("nameOfMarker")
+        nameOfCity = arguments?.getString(cityNameKeyBundle)
         city_name.text = nameOfCity
+        cityNameForRequest = nameOfCity + ",kg"
     }
     fun changeTimeText(timeText:String): String {
         var res = timeText.substring(5,11)

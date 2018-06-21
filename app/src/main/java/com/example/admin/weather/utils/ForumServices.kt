@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface ForumServices {
    @GET("forecast?")
-    fun getData( @Query("q")name: String, @Query("appid") appID: String,@Query("mode") mode: String,@Query("units") units: String) : Call<WeatherInfo>
+    fun getData( @Query("q")name: String, @Query("appid") appID: String, @Query("mode") mode: String,@Query("units") units: String) : Call<WeatherInfo>
 }
