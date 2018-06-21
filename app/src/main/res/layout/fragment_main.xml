@@ -87,6 +87,7 @@
                 android:id="@+id/wind_white"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:padding="10dp"
                 android:src="@drawable/wind_white" />
 
             <TextView
