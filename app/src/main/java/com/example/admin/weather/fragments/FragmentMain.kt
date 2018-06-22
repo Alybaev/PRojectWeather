@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.admin.weather.R
-import com.example.admin.weather.model.weather.WeatherInfo
+import com.example.admin.weather.model.weatherInfo.WeatherInfo
 import com.example.admin.weather.utils.Constants.Companion.APIID
 import com.example.admin.weather.utils.Constants.Companion.MODE
 import com.example.admin.weather.utils.Constants.Companion.UNITS
 import com.example.admin.weather.utils.Constants.Companion.cityNameKeyBundle
+import com.example.admin.weather.utils.Constants.Companion.weatherInfoBundleKey
 import com.example.admin.weather.utils.NetWork
 import kotlinx.android.synthetic.main.fragment_main.*
 import retrofit2.Call
@@ -40,14 +41,14 @@ class FragmentMain : Fragment() {
         NetWork.getW().getData(cityNameForRequest!!, APIID, MODE, UNITS).enqueue(object : Callback<WeatherInfo> {
             override fun onResponse(call: Call<WeatherInfo>?, response: Response<WeatherInfo>?) {
                 weatherInfo = response!!.body()
-                NetWork.weatherInfo = weatherInfo
-                tempeture_view.text = weatherInfo!!.list[0].main.temp.toString() + "\u2103"
+                Log.d("dd==-", response.body().toString())
+                tempeture_view.text = weatherInfo!!.list[0].main.temp.toInt().toString() + "\u2103"
                 time.text = changeTimeText(weatherInfo!!.list[0].dt_txt)
                 humidity_text.text = weatherInfo!!.list[0].main.humidity.toString() + "%"
                 wind_speed_text.text = weatherInfo!!.list[0].wind.speed.toString() + "m/s"
                 cloud_text.text = weatherInfo!!.list[0].clouds.all.toString() + "%"
-
                 Log.d("respp", response!!.body().toString())
+                sendDataThroughtBundle()
             }
 
             override fun onFailure(call: Call<WeatherInfo>?, t: Throwable?) {
@@ -65,6 +66,23 @@ class FragmentMain : Fragment() {
         var res = timeText.substring(5,11)
         res = res.replace(':', '.')
         return res
+    }
+    fun sendDataThroughtBundle(){
+        val bundles = Bundle()
+
+        var fragForecast = FragmentForecast()
+
+        // ensure your object has not null
+        if (weatherInfo != null) {
+            bundles.putSerializable(weatherInfoBundleKey, weatherInfo)
+            Log.e("aWeatherInfo", "is valid")
+
+        } else {
+            Log.e("WeatherInfo", "is null")
+
+        }
+        fragForecast.arguments = bundles
+
     }
 
 }

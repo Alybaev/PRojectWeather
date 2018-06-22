@@ -1,89 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/layout_main"
-    android:background="@color/background">
-    <LinearLayout
-        android:id="@+id/layout_data"
-        android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/layout_main"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="25dp"
-        >
-        <TextView
-            android:id="@+id/time_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="40sp"
-            android:textColor="@color/text_color"
-            tools:text="06.12"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp" />
-
-        <ImageView
-            android:id="@+id/forecast_image"
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content"
-            tools:src="@drawable/sun" />
-    </LinearLayout>
-
-    <LinearLayout
-
-        android:id="@+id/day_night_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginRight="40dp"
-        android:orientation="vertical">
+        android:layout_margin="8dp"
+        android:background="@color/background"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/day_forecast"
+            android:id="@+id/layout_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true">
 
             <TextView
-                android:id="@+id/text_day_temp"
+                android:id="@+id/time_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
                 android:textColor="@color/text_color"
-                android:textSize="20sp"
-                tools:text="24C" />
+                android:textSize="40sp"
+                tools:text="06.12" />
 
             <ImageView
-                android:id="@+id/image_sun"
+                android:id="@+id/forecast_image"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:padding="3dp"
                 tools:src="@drawable/sun" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/night_forecast"
+<!--        <TextView
+            android:id="@+id/description_forecast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_toEndOf="@id/layout_data"
+            android:layout_toLeftOf="@id/day_night_layout"
+            android:layout_toRightOf="@id/layout_data"
+            android:layout_toStartOf="@id/day_night_layout" />-->
 
-            <TextView
-                android:id="@+id/text_night_temp"
+        <LinearLayout
+            android:id="@+id/day_night_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/day_forecast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/text_color"
-                android:textSize="20sp"
-                tools:text="24C" />
+                android:layout_margin="4dp"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/image_moon"
+                <TextView
+                    android:id="@+id/text_day_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp"
+                    tools:text="24C" />
+
+                <ImageView
+                    android:id="@+id/image_sun"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/sun" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/night_forecast"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="5dp"
-                tools:src="@drawable/moon" />
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/text_night_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp"
+                    tools:text="24C" />
+
+                <ImageView
+                    android:id="@+id/image_moon"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/moon" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
 </LinearLayout>

@@ -3,12 +3,9 @@ package com.example.admin.weather
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.util.Log
 import com.example.admin.weather.adapters.CustomAdapter
 import com.example.admin.weather.fragments.FragmentForecast
 import com.example.admin.weather.fragments.FragmentMain
-import com.example.admin.weather.utils.Constants
 import com.example.admin.weather.utils.Constants.Companion.cityNameKeyBundle
 
 
@@ -31,12 +28,12 @@ class MainActivity : AppCompatActivity() {
         view_pager.adapter = custom
         tabLayout?.setupWithViewPager(view_pager)
 
-        val data = intent.getStringExtra("nameOfMarker")
+        val nameOfCity = intent.getStringExtra("nameOfMarker")
 
         val mainFrag = FragmentMain()
-        mainFrag.arguments = addDataInBundle(data)
+        mainFrag.arguments = addDataInBundle(nameOfCity)
         val forecastFrag = FragmentForecast()
-        forecastFrag.arguments = addDataInBundle(data)
+        forecastFrag.arguments = addDataInBundle(nameOfCity)
 
         custom?.addFragment(mainFrag, "Main")
         custom?.addFragment(forecastFrag, "Forecast")

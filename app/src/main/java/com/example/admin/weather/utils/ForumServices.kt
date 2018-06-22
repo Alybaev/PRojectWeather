@@ -1,6 +1,6 @@
 package com.example.admin.weather.utils
 
-import com.example.admin.weather.model.weather.WeatherInfo
+import com.example.admin.weather.model.weatherInfo.WeatherInfo
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

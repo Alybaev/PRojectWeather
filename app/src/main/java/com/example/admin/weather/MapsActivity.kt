@@ -10,6 +10,7 @@ import com.example.admin.weather.fragments.FragmentMain
 import com.example.admin.weather.model.city.City
 import com.example.admin.weather.utils.Constants
 import com.example.admin.weather.utils.Constants.Companion.cityNameKeyIntent
+import com.example.admin.weather.utils.Constants.Companion.kyrgyzstanLatLon
 import com.example.admin.weather.utils.JsonAssetReader
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -30,6 +31,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -41,13 +43,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
     private fun setUpMap() {
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(kyrgyzstanLatLon))
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 5.5f ) )
         mMap.setOnMarkerClickListener(this)
-
         var city = JsonAssetReader.getDataFromJsonCities(this)
         for (i in 0 until city.size) {
             kyrgyzPlaces = LatLng(city[i].coord?.lat!!, city[i].coord?.lon!!)
             mMap.addMarker(MarkerOptions().position(kyrgyzPlaces!!).title(city[i].name))
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(kyrgyzPlaces))
+
         }
 
     }
