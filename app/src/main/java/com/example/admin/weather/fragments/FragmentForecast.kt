@@ -9,15 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.admin.weather.R
+import com.example.admin.weather.R.id.recycle_view_weather
 import com.example.admin.weather.adapters.ForecastAdapter
 import com.example.admin.weather.model.WeatherData
-import com.example.admin.weather.model.weatherInfo.ListOfWeather
 import com.example.admin.weather.model.weatherInfo.WeatherInfo
 import com.example.admin.weather.utils.Constants
-import com.example.admin.weather.utils.Constants.Companion.weatherInfoBundleKey
+import com.example.admin.weather.utils.Constants.Companion.WEATHER_INFO_BUNDLE_KEY
 import com.example.admin.weather.utils.NetWork
 import kotlinx.android.synthetic.main.fragment_forecast.*
-import kotlinx.android.synthetic.main.fragment_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,8 +24,6 @@ import retrofit2.Response
 class FragmentForecast : Fragment() {
     var weatherData:WeatherData? =null
 
-    var cityNameForRequest:String? = null
-    var nameOfCity:String?= null
     var mAdapter: ForecastAdapter? = null
     var weatherInfo: WeatherInfo? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,33 +33,18 @@ class FragmentForecast : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init(context!!)
-        getBackData()
 
     }
-    fun getBackData(){
-        NetWork.getW().getData(cityNameForRequest!!, Constants.APIID, Constants.MODE, Constants.UNITS).enqueue(object : Callback<WeatherInfo> {
-            override fun onResponse(call: Call<WeatherInfo>?, response: Response<WeatherInfo>?) {
-                weatherInfo = response!!.body()
-                Log.d("dd==-", response.body().toString())
-                changeDataForGetDayNightTemp()
-                mAdapter!!.setMData( weatherData!!)
 
-
-            }
-
-            override fun onFailure(call: Call<WeatherInfo>?, t: Throwable?) {
-                Log.d("respp", t.toString())
-            }
-
-        })
-    }
     fun init(context: Context){
-//        val bundle = arguments
-//            weatherInfo = bundle!!.getSerializable(weatherInfoBundleKey) as WeatherInfo?
-//        Log.d("dat==-", weatherInfo.toString())
-        nameOfCity = arguments?.getString(Constants.cityNameKeyBundle)
-        cityNameForRequest = nameOfCity + ",kg"
+        val bundle = arguments
+        weatherInfo = bundle!!.getSerializable(WEATHER_INFO_BUNDLE_KEY) as WeatherInfo?
+        Log.d("dat==-", weatherInfo.toString())
+
         weatherData = WeatherData(ArrayList(), ArrayList(),ArrayList(),ArrayList())
+
+        changeDataForGetDayNightTemp()
+
         mAdapter = ForecastAdapter(context, weatherData!!)
         recycle_view_weather.layoutManager = LinearLayoutManager(this.activity)
         recycle_view_weather.adapter = mAdapter

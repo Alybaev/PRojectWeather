@@ -3,21 +3,14 @@ package com.example.admin.weather
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.util.Log
-import com.example.admin.weather.fragments.FragmentMain
-import com.example.admin.weather.model.city.City
-import com.example.admin.weather.utils.Constants
-import com.example.admin.weather.utils.Constants.Companion.cityNameKeyIntent
-import com.example.admin.weather.utils.Constants.Companion.kyrgyzstanLatLon
+import com.example.admin.weather.utils.Constants.Companion.CITY_NAME_KEY_INTENT
+import com.example.admin.weather.utils.Constants.Companion.KYRGYZSTAN_LAT_LNG
 import com.example.admin.weather.utils.JsonAssetReader
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -43,7 +36,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
     private fun setUpMap() {
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(kyrgyzstanLatLon))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(KYRGYZSTAN_LAT_LNG))
         mMap.animateCamera( CameraUpdateFactory.zoomTo( 5.5f ) )
         mMap.setOnMarkerClickListener(this)
         var city = JsonAssetReader.getDataFromJsonCities(this)
@@ -57,7 +50,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onMarkerClick(marker: Marker?): Boolean {
         val intent = Intent(this@MapsActivity, MainActivity::class.java)
-        intent.putExtra(cityNameKeyIntent, marker!!.title)
+        intent.putExtra(CITY_NAME_KEY_INTENT, marker!!.title)
         startActivity(intent)
         return true
     }

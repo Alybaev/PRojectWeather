@@ -8,10 +8,10 @@ class Constants {
         final val APIID = "5881b1a95ab511e9ae050d0be52f5f72"
         final val MODE = "json"
         final  val UNITS = "metric"
-        final val cityNameKeyBundle = "cityName"
-        final val  cityNameKeyIntent = "nameOfMarker"
-        final val weatherInfoBundleKey = "aWeatherInfo"
-        final val kyrgyzstanLatLon = LatLng(41.2044, 74.7661)
+        final val CITY_NAME_KEY_BUNDLE = "cityName"
+        final val CITY_NAME_KEY_INTENT = "nameOfMarker"
+        final val WEATHER_INFO_BUNDLE_KEY = "aWeatherInfo"
+        final val KYRGYZSTAN_LAT_LNG = LatLng(41.2044, 74.7661)
 
     }
 }

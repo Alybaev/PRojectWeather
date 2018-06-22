@@ -23,7 +23,6 @@ class ForecastAdapter(var context: Context, var weatherData: WeatherData) : Recy
     }
 
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
-
         holder.date.text = changeTimeText(weatherData.date!![position])
         holder.day_temperature.text = weatherData.dayTemp!![position].toString() + "\u2103"
         holder.night_temperature.text = weatherData.nightTemp!![position].toString() + "\u2103"
