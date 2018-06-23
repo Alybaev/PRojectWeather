@@ -36,6 +36,7 @@ class FragmentForecast : Fragment() {
 
     }
 
+
     fun init(context: Context){
         val bundle = arguments
         weatherInfo = bundle!!.getSerializable(WEATHER_INFO_BUNDLE_KEY) as WeatherInfo?

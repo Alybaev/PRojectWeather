@@ -38,6 +38,7 @@ class FragmentMain : Fragment() {
         weatherInfo = arguments?.getSerializable(Constants.WEATHER_INFO_BUNDLE_KEY) as WeatherInfo?
 
         Log.d("dat==-", weatherInfo.toString())
+        Log.d("nameDattt==-", nameOfCity)
 
         initAllWeatherInfo()
 

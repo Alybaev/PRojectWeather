@@ -5,7 +5,13 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
-
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
@@ -21,5 +27,5 @@
         android:background="@color/color_tabLayout"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabTextColor="@color/text_color" />
+        app:tabSelectedTextColor="@color/text_color" />
 </LinearLayout>

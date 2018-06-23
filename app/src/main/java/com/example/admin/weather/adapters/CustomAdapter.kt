@@ -4,8 +4,7 @@ import android.content.Context
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import com.example.admin.weather.fragments.FragmentForecast
-import com.example.admin.weather.fragments.FragmentMain
+
 
 class CustomAdapter : FragmentPagerAdapter {
     private var titles: ArrayList<String> = ArrayList()
