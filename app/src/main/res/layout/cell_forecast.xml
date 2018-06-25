@@ -36,14 +36,7 @@
                 tools:src="@drawable/sun" />
         </LinearLayout>
 
-<!--        <TextView
-            android:id="@+id/description_forecast"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/layout_data"
-            android:layout_toLeftOf="@id/day_night_layout"
-            android:layout_toRightOf="@id/layout_data"
-            android:layout_toStartOf="@id/day_night_layout" />-->
+
 
         <LinearLayout
             android:id="@+id/day_night_layout"
