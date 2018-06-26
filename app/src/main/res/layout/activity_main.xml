@@ -29,8 +29,4 @@
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/text_color" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ed"/>
 </LinearLayout>
