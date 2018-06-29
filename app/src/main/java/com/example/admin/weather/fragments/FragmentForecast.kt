@@ -42,7 +42,7 @@ class FragmentForecast : Fragment() {
         weatherInfo = bundle!!.getSerializable(WEATHER_INFO_BUNDLE_KEY) as WeatherInfo?
         Log.d("dat==-", weatherInfo.toString())
 
-        weatherData = WeatherData(ArrayList(), ArrayList(),ArrayList(),ArrayList())
+        weatherData = WeatherData(ArrayList(), ArrayList(),ArrayList(),ArrayList(),ArrayList())
 
         changeDataForGetDayNightTemp()
 
@@ -62,6 +62,7 @@ class FragmentForecast : Fragment() {
         for (i in 0 until 5){
             weatherData!!.date!!.add(weatherInfo!!.list[i * 8].dt_txt)
             var iconCode = weatherInfo!!.list[i * 8].weather[0].icon
+            weatherData!!.description.add(weatherInfo!!.list[i * 8].weather[0].description)
             weatherData!!.imageURL.add("http://openweathermap.org/img/w/" + iconCode + ".png")
         }
 

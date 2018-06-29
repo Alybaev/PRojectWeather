@@ -15,7 +15,7 @@ class ForecastAdapter(var context: Context, var weatherData: WeatherData) : Recy
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
 
-        return MovieHolder(LayoutInflater.from(parent.context).inflate(R.layout.cell_forecast, null, false))
+        return MovieHolder(LayoutInflater.from(parent.context).inflate(R.layout.cell_fore, null, false))
     }
 
     override fun getItemCount(): Int {
@@ -23,12 +23,13 @@ class ForecastAdapter(var context: Context, var weatherData: WeatherData) : Recy
     }
 
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
-        holder.date.text = changeTimeText(weatherData.date!![position])
-        holder.day_temperature.text = weatherData.dayTemp!![position].toString() + "\u2103"
-        holder.night_temperature.text = weatherData.nightTemp!![position].toString() + "\u2103"
+        holder.date.text = changeTimeText(weatherData.date[position])
+        holder.day_temperature.text = weatherData.dayTemp[position].toString() + "\u2103"
+        holder.night_temperature.text = weatherData.nightTemp[position].toString() + "\u2103"
+        holder.descriptionForecast.text = weatherData.description[position]
 
         Glide.with(context).load(weatherData
-                .imageURL!![position])
+                .imageURL[position])
                 .into(holder.image_forecast)
 
 
@@ -40,6 +41,7 @@ class ForecastAdapter(var context: Context, var weatherData: WeatherData) : Recy
         var day_temperature = view.text_day_temp
         var night_temperature = view.text_night_temp
         var image_forecast = view.forecast_image
+        var descriptionForecast = view.description_forecast
     }
 
     fun setMData(weatherData: WeatherData) {
