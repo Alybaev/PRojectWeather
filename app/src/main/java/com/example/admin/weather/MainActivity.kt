@@ -1,5 +1,7 @@
 package com.example.admin.weather
 
+import android.content.Context
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +21,9 @@ import kotlinx.android.synthetic.main.toolbar.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
 
 class MainActivity : AppCompatActivity() {
     var weatherInfo:WeatherInfo?=null
@@ -77,8 +82,10 @@ class MainActivity : AppCompatActivity() {
         NetWork.getW().getData(cityNameForRequest!!, Constants.APIID, Constants.MODE, Constants.UNITS).enqueue(object : Callback<WeatherInfo> {
             override fun onResponse(call: Call<WeatherInfo>?, response: Response<WeatherInfo>?) {
                 if(response!!.isSuccessful) {
-                    weatherInfo = response!!.body()
+                    weatherInfo = response.body()
+                    saveModelIntoFile(applicationContext )
                     init()
+
 
                 } else {
                     Toast.makeText(this@MainActivity, "error",Toast.LENGTH_LONG).show()
@@ -88,10 +95,31 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<WeatherInfo>?, t: Throwable?) {
-                Toast.makeText(this@MainActivity,t.toString(),Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity,"No Internet",Toast.LENGTH_LONG).show()
+                loadModelFromFile(applicationContext)
+
             }
 
         })
+    }
+
+    private fun loadModelFromFile(context: Context?)  {
+        val fis = context!!.openFileInput("weather_info")
+        val `is` = ObjectInputStream(fis)
+        weatherInfo = `is`.readObject() as WeatherInfo
+        `is`.close()
+        fis.close()
+    }
+    private fun getTempFile(context: Context, url: String): File? =
+            Uri.parse(url)?.lastPathSegment?.let { filename ->
+                File.createTempFile(filename, null, context.cacheDir)
+            }
+    private fun saveModelIntoFile(context: Context) {
+        val fos = context.openFileOutput("weather_info", Context.MODE_PRIVATE)
+        val os = ObjectOutputStream(fos)
+        os.writeObject(weatherInfo)
+        os.close()
+        fos.close()
     }
 
     private fun addDataInBundle(): Bundle {
