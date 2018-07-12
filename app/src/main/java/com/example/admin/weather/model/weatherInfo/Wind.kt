@@ -1,3 +1,5 @@
 package com.example.admin.weather.model.weatherInfo
 
-class Wind(var speed:Double)
+import java.io.Serializable
+
+class Wind(var speed:Double): Serializable

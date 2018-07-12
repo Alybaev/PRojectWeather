@@ -1,3 +1,5 @@
 package com.example.admin.weather.model.weatherInfo
 
-class Main(var temp :Double, var pressure: Double,var humidity:Int)
+import java.io.Serializable
+
+class Main(var temp :Double, var pressure: Double,var humidity:Int): Serializable

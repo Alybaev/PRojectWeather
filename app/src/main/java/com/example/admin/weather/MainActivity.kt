@@ -97,6 +97,7 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<WeatherInfo>?, t: Throwable?) {
                 Toast.makeText(this@MainActivity,"No Internet",Toast.LENGTH_LONG).show()
                 loadModelFromFile(applicationContext)
+                init()
 
             }
 
@@ -107,6 +108,7 @@ class MainActivity : AppCompatActivity() {
         val fis = context!!.openFileInput("weather_info")
         val `is` = ObjectInputStream(fis)
         weatherInfo = `is`.readObject() as WeatherInfo
+        Log.d("_________weatherStatus", weatherInfo!!.list[0].wind.speed.toString())
         `is`.close()
         fis.close()
     }
