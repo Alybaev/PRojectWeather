@@ -12,7 +12,7 @@ class NetWork : Application() {
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-        fun getW() : ForumServices {
+        fun getService() : ForumServices {
             forum = retrofit.create(ForumServices::class.java)
             return forum!!
         }

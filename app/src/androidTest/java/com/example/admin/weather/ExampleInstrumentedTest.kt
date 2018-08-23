@@ -23,6 +23,8 @@ import android.support.test.runner.lifecycle.ActivityLifecycleMonitor
 import android.support.test.espresso.IdlingResource
 import android.support.test.espresso.IdlingPolicies
 import android.text.format.DateUtils
+import com.example.admin.weather.ui.main.MainActivity
+import com.example.admin.weather.ui.MapsActivity
 
 import java.util.concurrent.TimeUnit
 
