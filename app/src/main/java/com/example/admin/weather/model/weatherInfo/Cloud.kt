@@ -1,3 +1,5 @@
 package com.example.admin.weather.model.weatherInfo
 
-class Cloud(var all : Int)
+import java.io.Serializable
+
+class Cloud(var all : Int): Serializable
